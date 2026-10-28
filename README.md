@@ -9,25 +9,7 @@ Default version of JetBrains Mono comes with OpenType features and ligatures (wh
 
 # **Installation**
 
-### **JetBrains IDEs**
-
-The most recent version of JetBrains Mono ships with your JetBrains IDE starting with v2019.3.
-
-Select JetBrains Mono in the IDE settings: go to `Preferences/Settings` → `Editor` → `Font`, and then select JetBrains Mono from the **Font** dropdown.
-
-### Brew (macOS only)
-
-Install it using the `font-jetbrains-mono` cask:
-
-```console
-brew install --cask font-jetbrains-mono
-```
-
-### Manual installation
-
-_On Mac/Windows_: 
-
-1. [Download font](https://github.com/JetBrains/JetBrainsMono/releases/latest). 
+1. [Download the latest release](https://github.com/dnlzro/cultivar/releases/latest).
 2. Unzip the archive and install the font:
    - _Mac_. Select all font files in the folder and double-click them. Click the **Install Font** button.
    - _Windows_. Select all font files in the folder, right-click any of them, then pick **Install** from the menu.
@@ -39,7 +21,7 @@ _On Linux_:
 Open a terminal and run the following:
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/dnlzro/cultivar/master/install_manual.sh)"
 ```
 
 Once JetBrains Mono is installed in your OS, you are ready to configure the editor.  

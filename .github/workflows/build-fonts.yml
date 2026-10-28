@@ -4,46 +4,76 @@ on:
   push:
     branches:
       - master
+    tags:
+      - "v*"
     paths:
       - sources/**
+      - scripts/**
+      - requirements.txt
+      - .github/workflows/build-fonts.yml
   pull_request:
     branches:
       - master
     paths:
       - sources/**
+      - scripts/**
+      - requirements.txt
+      - .github/workflows/build-fonts.yml
+  workflow_dispatch:
 
 jobs:
-  static-font-ci-job:
+  build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [ 3.8 ]
     name: Build Fonts
     steps:
-      - name: Check out JetBrains Mono source repository
-        uses: actions/checkout@v3
-      - name: Set up Python v${{ matrix.python-version }} environment
-        uses: actions/setup-python@v3
+      - name: Check out Cultivar source repository
+        uses: actions/checkout@v7
+      - name: Set up Python environment
+        uses: actions/setup-python@v7
         with:
-          python-version: ${{ matrix.python-version }}
-      - name: Python build dependency cache lookup
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          # Check for requirements file cache hit
-          key: ${{ runner.os }}-pip-${{ hashFiles('${{ steps.config.outputs.dependpath }}') }}
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
       - name: Install Python build dependencies
-        uses: py-actions/py-dependency-install@v3
-        with:
-          update-wheel: "true"
-          update-setuptools: "true"
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install -r requirements.txt
       - name: Build fonts
         run: |
           gftools builder sources/config.yaml
           python scripts/generate_variable_webfonts.py
       - name: Upload Fonts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v7
         with:
           name: Fonts
           path: fonts/
+          if-no-files-found: error
 
+  release:
+    # Path filters are not evaluated for tag pushes, so every v* tag gets a release
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    name: Create Release
+    permissions:
+      contents: write
+    steps:
+      - name: Download Fonts
+        uses: actions/download-artifact@v8
+        with:
+          name: Fonts
+          path: fonts/
+      - name: Package fonts
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          zip -r "JetBrainsMono-${version}.zip" fonts/
+          echo "ZIP_NAME=JetBrainsMono-${version}.zip" >> "$GITHUB_ENV"
+      - name: Create draft GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" "$ZIP_NAME" \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "$GITHUB_REF_NAME" \
+            --generate-notes \
+            --draft

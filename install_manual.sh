@@ -9,7 +9,7 @@ LOCAL_FONTS_DIR="${HOME}/.local/share/fonts"
 readonly LOCAL_FONTS_DIR
 
 # Latest fonts release info in JSON
-LATEST_RELEASE_INFO="https://api.github.com/repos/JetBrains/JetBrainsMono/releases/latest"
+LATEST_RELEASE_INFO="https://api.github.com/repos/dnlzro/cultivar/releases/latest"
 readonly LATEST_RELEASE_INFO
 
 RED=$(echo -en '\033[00;31m')

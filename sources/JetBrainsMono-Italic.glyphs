@@ -166346,7 +166346,7 @@ key = copyrights;
 values = (
 {
 language = dflt;
-value = "Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)";
+value = "Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono), Copyright 2026 The Cultivar Project Authors (https://github.com/dnlzro/cultivar)";
 }
 );
 },
