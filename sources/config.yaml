@@ -1,12 +1,12 @@
 sources:
-  - JetBrainsMono.glyphs
-  - JetBrainsMono-Italic.glyphs
+  - Cultivar.glyphs
+  - Cultivar-Italic.glyphs
 axisOrder:
   - wght
   - ital
-familyName: JetBrains Mono
+familyName: Cultivar
 stat:
-  JetBrainsMono[wght].ttf:
+  Cultivar[wght].ttf:
   - name: Weight
     tag: wght
     values:
@@ -35,7 +35,7 @@ stat:
       value: 0
       linkedValue: 1
       flags: 2
-  JetBrainsMono-Italic[wght].ttf:
+  Cultivar-Italic[wght].ttf:
   - name: Weight
     tag: wght
     values:

@@ -100,7 +100,7 @@ function cleanup() {
 # Start point
 function main() {
 
-  echo "Installing latest JetBrains Mono fonts..."
+  echo "Installing latest Cultivar fonts..."
 
   check_requirements
 

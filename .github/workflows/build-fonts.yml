@@ -3,7 +3,7 @@ name: Build Fonts
 on:
   push:
     branches:
-      - master
+      - main
     tags:
       - "v*"
     paths:
@@ -13,7 +13,7 @@ on:
       - .github/workflows/build-fonts.yml
   pull_request:
     branches:
-      - master
+      - main
     paths:
       - sources/**
       - scripts/**
@@ -66,8 +66,8 @@ jobs:
       - name: Package fonts
         run: |
           version="${GITHUB_REF_NAME#v}"
-          zip -r "JetBrainsMono-${version}.zip" fonts/
-          echo "ZIP_NAME=JetBrainsMono-${version}.zip" >> "$GITHUB_ENV"
+          zip -r "Cultivar-${version}.zip" fonts/
+          echo "ZIP_NAME=Cultivar-${version}.zip" >> "$GITHUB_ENV"
       - name: Create draft GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}

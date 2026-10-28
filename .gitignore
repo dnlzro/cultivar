@@ -1,7 +1,7 @@
-.idea/workspace.xml
-JetBrainsMono.iml
+.idea/
+*.iml
+fonts/
 out
 lib
-source/JetBrainsMono.backup
 env
 .DS_Store

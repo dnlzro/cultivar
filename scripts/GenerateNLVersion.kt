@@ -13,7 +13,7 @@ import javax.xml.xpath.XPathConstants
 import javax.xml.xpath.XPathFactory
 
 /**
- * The scripts generates no ligature version of JetBrains Mono called JetBrains Mono NL
+ * The scripts generates no ligature version of Cultivar called Cultivar NL
  *
  * ttx command is required to run this script
  *
@@ -22,7 +22,7 @@ import javax.xml.xpath.XPathFactory
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 fun main() {
     File("./fonts/ttf/")
-            .listFiles { _, name -> name.endsWith(".ttf") && !name.startsWith("JetBrainsMonoNL") }
+            .listFiles { _, name -> name.endsWith(".ttf") && !name.startsWith("CultivarNL") }
             .forEach {
                 val ttx = it.nameWithoutExtension + ".ttx"
                 val dir = it.parentFile
@@ -43,7 +43,7 @@ fun ttf2Document(file: File): Document? {
 }
 
 fun generateNoLigaturesFont(file: File, doc: Document) {
-    val nlName = file.nameWithoutExtension.replace("JetBrainsMono", "JetBrainsMonoNL")
+    val nlName = file.nameWithoutExtension.replace("Cultivar", "CultivarNL")
     val ttx = "$nlName.ttx"
     val ttf = "$nlName.ttf"
     val dir = file.parentFile
@@ -60,9 +60,9 @@ fun generateNoLigaturesFont(file: File, doc: Document) {
     val nameRecords = (xPath.evaluate("/ttFont/name/namerecord", doc, XPathConstants.NODESET) as NodeList).asList()
     nameRecords.forEach {
         if (!it.textContent.contains("trademark")) {
+            // PostScript names ("Cultivar-Bold") get "CultivarNL", display names get "Cultivar NL"
             it.textContent = it.textContent
-                .replace("JetBrains Mono", "JetBrains Mono NL")
-                .replace("JetBrainsMono", "JetBrainsMonoNL")
+                .replace(Regex("Cultivar(-?)")) { m -> if (m.groupValues[1].isEmpty()) "Cultivar NL" else "CultivarNL-" }
         }
     }
 
