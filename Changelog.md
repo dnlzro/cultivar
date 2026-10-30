@@ -1,14 +1,19 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 1.000 (unreleased)
-First release of Cultivar, based on JetBrains Mono 2.305 (unreleased):
+## 2.000 (30.10.2026)
+- Redrew the double-storey `g` with a curved link
+- Made the slashed zero the default and removed the `zero` feature
+  - The default zero in JetBrains Mono (with the dot inside) is now `cv13`
+- Narrowed all `0` glyphs and widened all `O` glyphs
+  - The `0` is now about 92% of the width of the `O`; it was previously *wider* than the `O` in the lighter weights
+- Added `cv21`, a plain zero with no slash or dot
+
+## 1.000 (28.10.2026)
+First release of Cultivar, based on JetBrains Mono 2.305:
 - Renamed the family to Cultivar and restarted versioning at 1.000
 - Redrew the double-storey `g` (`cv03`)
 - Swapped the default and alternate glyphs for `cv03` `cv14` `cv20`: the double-storey `g`, the alternate `$` `¢` and the alternate `5` are now the defaults, and the features switch back to the JetBrains Mono glyphs
-- Made the slashed zero the default and removed the `zero` feature; the JetBrains Mono zero, with the dot inside, is now `cv13`
-- Added a plain zero, with no slash or dot, as `cv21`
-- Narrowed the zero, including `cv13`, and slightly widened the `O` and the glyphs drawn from it, so the zero is now about 92% of the width of the `O`; it was wider than the `O` in the lighter weights
 - Removed the built font files from the repository; fonts are now built by CI and attached to GitHub Releases
 
 # JetBrains Mono history
